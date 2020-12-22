@@ -6,6 +6,6 @@ target 'ObjCBridging' do
   use_frameworks!
 
   # Pods for ObjCBridging
-  pod 'Sourcery'
+  pod 'Sourcery', '~> 0.18.0'
 
 end
