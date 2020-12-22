@@ -3,7 +3,7 @@ import Foundation
 // Bridging of structs
 {% for type in types.implementing.AutoObjCBridgeable|struct %}
 
-@objc(XYZ{{type.name}})
+@objc({{type.name}})
 class _ObjC{{type.name}} : NSObject {
     private (set) var {{type.name|lowerFirstWord}}: {{type.name}}
 
@@ -137,7 +137,7 @@ caseValue.value{{forloop.counter}}{%if associatedValue.type.kind == "struct" %}.
 {% endmacro %}
 
 {% for enum in types.implementing.AutoObjCBridgeable|enum %}
-@objc(XYZ{{enum.name}})
+@objc({{enum.name}})
 class _ObjC{{enum.name}} : NSObject {
     private (set) var {{enum.name|lowerFirstWord}}: {{enum.name}}
 
@@ -165,8 +165,8 @@ class _ObjC{{enum.name}} : NSObject {
 
 
 {% for case in enum.cases %}
-// A case of {{enum.name}}
-@objc(XYZ{{enum.name}}{{case.name|upperFirstLetter}})
+// A case of {{enum.name}} {{case.name}}
+@objc({{enum.name}}{{case.name|upperFirstLetter}})
 class _ObjC{{enum.name}}{{case.name|upperFirstLetter}} : NSObject {
     {% for associatedValue in case.associatedValues %}
     {% if associatedValue.type.kind == "struct" or associatedValue.type.kind == "enum" %}
