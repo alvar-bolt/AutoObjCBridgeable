@@ -168,6 +168,13 @@ class _ObjC{{enum.name}} : NSObject {
 // A case of {{enum.name}} {{case.name}}
 @objc({{enum.name}}{{case.name|upperFirstLetter}})
 class _ObjC{{enum.name}}{{case.name|upperFirstLetter}} : NSObject {
+    {% if enum.rawType %}
+    {% if enum.rawTypeName.name == "String" %}
+    @objc static let rawValue : NSString = "{{case.rawValue}}"
+    {% else %}
+    static let value : {{enum.rawTypeName}} = {{case.rawValue}}
+    {% endif %}
+    {% endif %}
     {% for associatedValue in case.associatedValues %}
     {% if associatedValue.type.kind == "struct" or associatedValue.type.kind == "enum" %}
     let value{{forloop.counter}} : _ObjC{{associatedValue.type.name}}
